@@ -23,7 +23,7 @@ class Chfn: ParsableCommand {
         <filename> = <path>/<basename>
         <basename> = <prefix>.<extension>
     <basenames> may not contain slashes(/).
-    If no file arguments are given, the file names to changewill be read 
+    If no file arguments are given, the file names to change will be read 
     from STDIN.
     """)
 
