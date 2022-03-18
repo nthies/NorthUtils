@@ -10,6 +10,9 @@ The following executables are available:
 
 - chfn<br/>
   Is some kind of regular expression based file renamer.
+  
+- unzip<br/>
+  Is an executable based on NorthLib to test the zip stream unpacker.
  
 ## How to build
 
