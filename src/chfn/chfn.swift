@@ -128,7 +128,7 @@ class Chfn: ParsableCommand {
     for fn in fnames {
       let dir = File.dirname(fn)
       let base = File.basename(fn)
-      let pref = File.prefname(fn)
+      let pref = File.progname(fn)
       let ext = File.extname(fn)
       var dest: String? = nil
       switch operation {
