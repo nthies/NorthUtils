@@ -14,12 +14,25 @@ var targets: [Target] = [
     path: "src/chfn",
     linkerSettings: linkerSettings
   ),
+  .executableTarget(
+    name: "unzip",
+    dependencies: [
+      .product(name: "NorthLib", package: "NorthLib"),
+      .product(name: "ArgumentParser", package: "swift-argument-parser"),
+    ],
+    path: "src/unzip",
+    linkerSettings: linkerSettings
+  ),
 ]
 
 var products: [Product] = [
   .executable(
     name: "chfn", 
     targets: ["chfn"]
+  ),
+  .executable(
+    name: "unzip",
+    targets: ["unzip"]
   ),
 ]
 
