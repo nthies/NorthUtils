@@ -42,6 +42,9 @@ class Chfn: ParsableCommand {
   @Flag(name: .shortAndLong, help: "Verbose mode - list files changed.")
   var verbose: Bool = false
   
+  @Option(name: .shortAndLong, help: "Destination directory.")
+  var destdir: String = ""
+  
   @Argument(help: "<subst> | lower | upper | help\nuse 'help' to get more info.")
   var operation: String
   
@@ -140,7 +143,8 @@ class Chfn: ParsableCommand {
       }
       if let dest = dest {
         var destpath: String
-        if dir != "." { destpath = "\(dir)/\(dest)" }
+        if self.destdir != "" { destpath = "\(self.destdir)/\(dest)" }
+        else if dir != "." { destpath = "\(dir)/\(dest)" }
         else { destpath = dest }
         if verbose || list { print("\(fn) -> \(destpath)") }
         if !list { File(fn).move(to: destpath, isOverwrite: force) }
