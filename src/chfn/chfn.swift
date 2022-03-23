@@ -45,6 +45,9 @@ class Chfn: ParsableCommand {
   @Option(name: .shortAndLong, help: "Destination directory.")
   var destdir: String = ""
   
+  @Option(name: .shortAndLong, help: "Number of digits for #-substitution.")
+  var ndigits: Int = -1
+
   @Argument(help: "<subst> | lower | upper | help\nuse 'help' to get more info.")
   var operation: String
   
@@ -157,7 +160,9 @@ class Chfn: ParsableCommand {
       case "help": showRegexprHelp(); return
       case "lower": break;
       case "upper": break;
-      default: try Chfn.sexpr = Substexpr(operation)
+      default:
+        try Chfn.sexpr = Substexpr(operation)
+        if ndigits != -1 { Chfn.sexpr?.ndig = ndigits }
     }
     var fnames: [String] = []
     for fn in files {
