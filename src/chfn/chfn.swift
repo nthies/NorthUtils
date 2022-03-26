@@ -47,6 +47,9 @@ class Chfn: ParsableCommand {
   
   @Option(name: .shortAndLong, help: "Number of digits for #-substitution.")
   var ndigits: Int = -1
+  
+  @Option(name: .shortAndLong, help: "Start index for #-substitution.")
+  var startIndex: Int = 1
 
   @Argument(help: "<subst> | lower | upper | help\nuse 'help' to get more info.")
   var operation: String
@@ -77,9 +80,10 @@ class Chfn: ParsableCommand {
         &        : refers to the complete matching string
         \\1 or &1 : refers to the 1st matching group
         \\i or &i : refers to the i'th matching group
-      In addition the replacement string may contain a single '#' character
+      In addition the replacement string may contain a sequence of '#' chars
       which will be replaced by the numeric postion of the file in the list of 
-      all files to substitute.
+      all files to substitute. The number of '#' chars define the number of
+      digits used.
     """
     print(rehelp)
   }
@@ -162,6 +166,7 @@ class Chfn: ParsableCommand {
       case "upper": break;
       default:
         try Chfn.sexpr = Substexpr(operation)
+        Chfn.sexpr?.index = startIndex
         if ndigits != -1 { Chfn.sexpr?.ndig = ndigits }
     }
     var fnames: [String] = []
