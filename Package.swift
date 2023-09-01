@@ -23,6 +23,15 @@ var targets: [Target] = [
     path: "src/unzip",
     linkerSettings: linkerSettings
   ),
+  .executableTarget(
+    name: "nltest",
+    dependencies: [
+      .product(name: "NorthLib", package: "NorthLib"),
+      .product(name: "ArgumentParser", package: "swift-argument-parser"),
+    ],
+    path: "src/nltest",
+    linkerSettings: linkerSettings
+  ),
 ]
 
 var products: [Product] = [
@@ -34,20 +43,24 @@ var products: [Product] = [
     name: "unzip",
     targets: ["unzip"]
   ),
+  .executable(
+    name: "nltest",
+    targets: ["nltest"]
+  ),
 ]
 
 var dependencies: [Package.Dependency] = [
   .package(url: "https://github.com/apple/swift-argument-parser", 
     from: "1.0.0"),
-  .package(url: "https://github.com/die-tageszeitung/NorthLib",
-    .branch("spm")),
+  .package(url: "https://github.com/nthies/NorthLib",
+    .branch("release")),
 ]
 
 
 let package = Package(
   name: "NorthUtils",
   defaultLocalization: "en",
-  platforms: [.macOS(.v10_15)],
+  platforms: [.macOS(.v11)],
   products: products,
   dependencies: dependencies,
   targets: targets,
